@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <!-- the actual list of albums with filter and navigation -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <h1><span class="glyphicon glyphicon-cd"></span>&nbsp{{ PageInfo.PageTitle }}</h1>
+        <div ng-show="PageInfo.thinking" class="FooterFolderGhost thinking animated fadeIn">
+            <img src="../thinking.gif" width="50" height="50">
+        </div>
+         <form novalidate class="form-inline" ng-show="showSearch">
+            <button ng-hide="albumsRandomHide" type="button" class="btn btn-info btn-sm" ng-click="getAlbumData('albumsRandom',undefined,undefined,searchString)" >&nbsp<span class="glyphicon glyphicon-refresh"></span>&nbsp</button>&nbsp
+
+            <span class="glyphicon glyphicon-search"></span>&nbsp
+            <label>
+                <input type="text" class="form-control" id="searchString" ng-model="searchString"/>
+            </label>
+            <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('albumMatchStruct',undefined,undefined,searchString)" 
+            value="Album"/>
+            <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('artistMatchStruct',undefined,undefined,searchString)" 
+            value="Artist"/>
+            <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('dateMatchStruct',undefined,undefined,searchString)" 
+            value="Date"/>
+            <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('genreMatchStruct',undefined,undefined,searchString)" 
+            value="Genre"/>
+        </form>
+        <br>
+
+        <div ng-hide="albumsSliderHide" class="animated fadeIn">
+            <rzslider rz-slider-model="album_slider.value" rz-slider-options="album_slider.options"></rzslider>
+        </div>
+
+        <div id="albumCollection">
+            <div class="albumCollection animated fadeIn"
+            ng-repeat="album in albums  track by album.Album+album.Path">
+                <div class="albumFrame" ng-init="enrich($index,album.Album,album.Path)">
+                    <img class="SmallFolder" lazy-img="{{ AlbumsDetails[$index].imgSource }}" lazy-img-error="img/DefaultFolder.jpg" ng-click="openAlbumDetails($index)">
+                    <div class="SmallAlbumName">
+                        <b>{{ AlbumsDetails[$index].Album }}</b>
+                    </div>
+                    <div class="SmallArtistName" 
+                        ng-click="searchAlbumData('artistStruct',undefined,undefined,AlbumsDetails[$index].Artist)">
+                        {{ AlbumsDetails[$index].Artist }}
+                    </div>
+                    <div class="SmallAlbumName" 
+                        ng-click="searchAlbumData('dateStruct',undefined,undefined,AlbumsDetails[$index].Date)">
+                        {{ AlbumsDetails[$index].timeDisplay }}&nbsp
+                        <b>{{ AlbumsDetails[$index].Date }}&nbsp</b>
+                        [#{{ AlbumsDetails[$index].TotalTracks }}]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+</div>

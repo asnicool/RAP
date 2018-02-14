@@ -1,0 +1,100 @@
+<!-- hiden frame showing album details-->
+
+<div ng-if="showDetails" class="popUp albumDetails" ng-class="alDetToggle">
+    <!-- place holder for the selected album with details and actions-->
+        <div class="albumFrame">
+            <img class="Folder" ng-click="closeAlbumDetails()" src="{{ selectedAlbumDetails.imgSource }}">
+            <div class="AlbumName">
+                {{ selectedAlbumDetails.Album }}
+            </div>
+            <div class="ArtistName">
+                {{ selectedAlbumDetails.Artist }}
+            </div>
+            <div class="AlbumName">
+                {{ selectedAlbumDetails.timeDisplay }}&nbsp
+                <b>{{ selectedAlbumDetails.Date  }}&nbsp</b>
+                [#{{ selectedAlbumDetails.TotalTracks }}]
+            </div>
+            <button type="button" class="btn btn-info btn-xs" ng-click="playAll(selectedAlbumDetails.index, 'playAll')">
+                Replace
+            </button>&nbsp
+            <button type="button" class="btn btn-info btn-xs" ng-click="playAll(selectedAlbumDetails.index, 'playNextAll')">
+                Play Next
+            </button>&nbsp
+            <button type="button" class="btn btn-info btn-xs" ng-click="playAll(selectedAlbumDetails.index, 'enqueueAll')">
+                Enqueue
+            </button>&nbsp
+            <a target="_blank" ng-href='{{selectedAlbumDetails.amzURL}}'>AllMusic&nbsp<span class="glyphicon glyphicon-new-window"></span></a>
+        </div>
+        <div class="albumFrame">
+            <div class="trackList"
+            ng-repeat="track in selectedAlbumDetails.Tracks  track by track.Disc+track.Track+track.Title">
+                <div class="BadgesBox">
+                    <div class="trackNb"><span class="label label-default">{{selectedSongs[track.file]}}</span><b>{{track.Disc}}</b>&nbsp{{track.Track}}</div>
+                    <div class="trackTime">{{track.timeDisplay}}</div>
+                    <div class="TitleName" ng-click="selectSong(track.file)">{{track.Title}}</div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="container-fluid">
+    <!-- the actual list of albums with filter and navigation -->
+    <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <h1><span class="glyphicon glyphicon-cd"></span>&nbsp{{ PageInfo.PageTitle }}</h1>
+        <div ng-show="PageInfo.thinking" class="FooterFolderGhost thinking animated fadeIn">
+            <img src="../thinking.gif" width="100%" height="100%">
+        </div>
+
+        <div style="min-height:75px;width:100%">
+            <form novalidate class="form-inline" ng-show="showSearch&&albumsSliderHide">
+                <span class="glyphicon glyphicon-search"></span>&nbsp
+                <label>
+                    <input type="text" class="form-control" id="searchString" ng-model="searchString"/>
+                </label>
+                <span ng-hide="searchString==undefined||searchString==''" style="display:inline-block;width:300px;padding:12px 16px;vertical-align:middle;">
+                    <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('albumMatchStruct',undefined,undefined,searchString)" style="width: 50px;height: 24px"
+                    value="Album"/>
+                    <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('artistMatchStruct',undefined,undefined,searchString)" style="width: 50px;height: 24px"
+                    value="Artist"/>
+                    <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('dateMatchStruct',undefined,undefined,searchString)" style="width: 50px;height: 24px"
+                    value="Date"/>
+                    <input type="submit" class="btn btn-info btn-xs" ng-click="searchAlbumData('genreMatchStruct',undefined,undefined,searchString)" style="width: 50px;height: 24px"
+                    value="Genre"/>
+                    </span>
+            </form>
+            <br>
+
+
+            <div ng-hide="albumsSliderHide" class="animated fadeIn">
+                <rzslider rz-slider-model="album_slider.value" rz-slider-options="album_slider.options"></rzslider>
+            </div>
+            
+        </div>
+
+        <div id="albumCollection" class="albumCollection">
+            <div class="animated fadeIn"
+            ng-repeat="album in albums  track by album.Album+album.Path">
+                <div class="albumFrame" ng-init="enrich($index,album.Album,album.Path)">
+                    <img class="SmallFolder hiden" lazy-img="{{ AlbumsDetails[$index].imgSource }}" lazy-img-error="img/DefaultFolder.jpg" ng-click="openAlbumDetails($index)" ng-show="AlbumsDetails[$index].Album!==''">
+                    <div class="SmallAlbumName">
+                        <b>{{ AlbumsDetails[$index].Album }}</b>
+                    </div>
+                    <div class="SmallArtistName" 
+                        ng-click="searchAlbumData('artistStruct',undefined,undefined,AlbumsDetails[$index].Artist)">
+                        {{ AlbumsDetails[$index].Artist }}
+                    </div>
+                    <div class="SmallAlbumName" ng-show="AlbumsDetails[$index].Album!==undefined && AlbumsDetails[$index].Album!==''">
+                        <span ng-show="AlbumsDetails[$index].Album!==''"> 
+                            {{ AlbumsDetails[$index].timeDisplay }}&nbsp
+                        </span>
+                        <b ng-click="searchAlbumData('dateStruct',undefined,undefined,AlbumsDetails[$index].Date)">{{ AlbumsDetails[$index].Date }}&nbsp</b>
+                        <span ng-show="AlbumsDetails[$index].Album!==''"> 
+                            [#{{ AlbumsDetails[$index].TotalTracks }}] 
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+</div>

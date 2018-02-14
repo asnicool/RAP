@@ -1,0 +1,16 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+            <h1><span class="glyphicon glyphicon-stats"></span> MPD Status</h1>
+            <br>
+            <div class="table-responsive" style="max-width: 500px;">
+                <table class="table">
+                    <tr ng-repeat="(key,value) in status">
+                        <td>{{key.toUpperCase()}}</td>
+                        <td>{{value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div> <!-- /container -->
+    </div>
+</div>
