@@ -1,0 +1,20 @@
+<footer class="footer" >
+    <div class="container" ng-controller="CurrentController">
+        <img ng-visible="currentSong.imgSource!==''" class="FooterFolderGhost FooterFolder" ng-src="{{ currentSong.imgSource }}" ng-error-src="img/DefaultFolder.jpg">
+        
+        <div class="row FooterTitleName">
+            {{ currentSong.Title }} - {{ currentSong.timeDisplay }}
+        </div>
+        <div class="row FooterTitleName">
+            <b>{{ currentSong.Artist }}</b> - 
+            {{ currentSong.Album }} - {{ currentSong.Date }}
+        </div>
+    </div>
+    <div class="row" ng-controller="SeekerController">
+	    <div class="progress">
+	        <div class="progress-bar" role="progressbar"
+            aria-valuenow="{{seekPercent}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( seekPercent + '%' ) }">
+		    </div>
+		</div>
+    </div>
+</footer>

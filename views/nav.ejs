@@ -1,0 +1,28 @@
+<!-- for some Iphones -->
+<div style="background: rgba(20, 20, 20, 0.8);     color: #f0f0f0;     position:fixed;     top:-50px;     left:0px;     right:0px;     height:50px;     z-index: -10;    "></div>
+
+<!-- Navigation -->
+<nav ng-controller="StatusController as status">
+    <ul>
+        <li> <a href="#/"><span class="glyphicon glyphicon-refresh"></span> R.A.P.</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn"><span class="glyphicon glyphicon-th-large"></span></a>
+            <div class="dropdown-content">
+                <a href="#/browseAlbumsDyna/albumList">Albums</a>
+                <a href="#/browseAlbumsDyna/artistList">Artists</a>
+            </div>
+        </li>
+
+        <li>
+            <a ref="javascript:void(0)" ng-click="toggleVolume()" class="dropbtn"><span class="glyphicon glyphicon-volume-up"></span></a></li>
+        
+        <li><div id="volumeControl" class="animated fadeIn volume" ng-show="volume_slider.visible">
+            <rzslider rz-slider-model="volume_slider.value" rz-slider-options="volume_slider.options"></rzslider>
+        </div></li>
+
+        <li style="float:right;"><a href="#/status"><span class="glyphicon glyphicon-tasks"></span></a></li>
+        <li style="float:right;"><a ng-click="toggleRandom()" style="{{randomStyle}}"><span class="glyphicon glyphicon-random"></span></a></li>
+        <li style="float:right;"><a ng-click="toggleRepeat()" style="{{repeatStyle}}"><span class="glyphicon glyphicon-repeat"></span></a></li>
+    </ul>
+
+</nav>

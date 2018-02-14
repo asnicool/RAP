@@ -1,0 +1,66 @@
+<div ng-controller="StatusController" class="buttonBox animated fadeInUpBig">
+    <div class="ctrlButton anButton" tabindex="1" ng-click="previous()"><i class="fas fa-w-10 fa-backward"></i></div>
+    <div class="ctrlButton anButton" tabindex="2" ng-click="pause()" ng-show="playing"><i class="fas fa-w-10 fa-pause-circle"></i></div>
+    <div class="ctrlButton anButton" tabindex="3" ng-click="play()" ng-hide="playing"><i class="fas fa-w-10 fa-play-circle"></i></div>
+    <div class="ctrlButton anButton" tabindex="4" ng-click="next()"><i class="fas fa-w-10 fa-forward"></i></div>
+</div>
+
+
+<div ng-controller="PlaylistController">
+    <div class="plBar">
+        <span ng-repeat="Album in playlist  track by Album.EntryId">
+            <!-- <div class="progress-bar" style="width:2px;background-color: white"></div> -->
+            <span ng-repeat="track in Album.Tracks  track by track.Id">
+              <!-- <div class="ng-class: track.selected ? 'progress-bar progress-bar-danger' : 'progress-bar'; ng-class-even:'progress-bar-success'; ng-class-odd:'progress-bar-info'; ng-style:{width : ( track.RelWeight + '%' ) };" ng-click="playId(track.Id)"> -->
+              <div class="{{'progress-bar ' + track.playlistClass}}" 
+                    style="{{'width:'+track.RelWeight + '%'}}" 
+                    ng-click="playId(track.Id)">
+              <span class="sr-only">{{ track.Title }}</span>
+              </div>
+            </span>
+        </span>
+    </div>
+
+    <div class="FooterFolderGhost" style="z-index:99;" ng-click="showHidePlaylist()"></div>
+
+
+    <div class="popUp playlistFrame" ng-class="plToggle" ng-hide="hidePlaylist"> 
+        <div class="albumFrame" style="width:100%;">
+            <a href="#playingItem"> <h1><span class="glyphicon glyphicon-music"></span> Playlist </h1></a>
+            <br>
+        </div>
+            <span ng-repeat="Album in playlist  track by Album.EntryId">
+                <div class="albumFrame" style="width:100%;">
+                <!-- separator --></div> 
+                <div class="albumFrame" ng-click="showHidePlaylist()" id="{{Album.EntryId}}">
+                    <img class="Folder" ng-src="{{ Album.imgSource }}" ng-error-src="img/DefaultFolder.jpg">
+                    <div class="AlbumName">
+                        {{ Album.Album }}
+                    </div>
+                    <div class="ArtistName">
+                        {{ Album.Artist }}
+                    </div>
+                    <div class="AlbumName">
+                        {{ Album.time }}&nbsp
+                        <b>{{ Album.Date  }}&nbsp</b>
+                        {{ Album.genre }}
+                    </div>
+                </div>
+                <div class="albumFrame">
+                    <span ng-repeat="track in Album.Tracks  track by track.Id">
+                        <div ng-if="track.selected" id="playingItem"></div>
+                        <div class="plAlbumFrame" ng-class="track.playingStyle">
+                        <div class="trackList">
+                                <div class="BadgesBox">
+                                    <div class="trackNb"><b>{{track.Disc}}</b>&nbsp{{track.Track}}</div>
+                                    <div class="trackTime">{{track.timeDisplay}}</div>
+                                    <div class="TitleName" ng-click="playId(track.Id)">{{track.Title}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>                    
+                </div><!-- anchor for track list-->
+            </span>
+        
+    </div>
+</div>
