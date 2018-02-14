@@ -16,7 +16,7 @@ It requires that your music dB is reasonnably well sorted / tagged.
 This version is very rough and requires that you look into the code to understand what it does. In particular it has no configuration file.
 
 # How to install
-This not (yet?) packaged with npm or anything. 
+This not (yet?) packaged with npm or anything. It's not even tested yet - you are warned. I'll enhance this later on.
 
 - So just copy the archive on your Linux machine (in /opt/rap, for instance).
 
@@ -32,10 +32,10 @@ You may download and use "forever" or "PM2" to have it restart if it fails.
 With the help of whoever you believe in, you might install it and have it work.
 This is not packaged, and I can't support this by lack of time.
 
-# todos
+# Todos (heartbreaker)
 If you are a clean programmer and have time (and like stupid challenges) you might try rewrite portions of code to clean this a bit. I might or might not do so as well, sometimes.
 
-Some features are obviously missing, that I may complement if I need them. First taks is to list them.
+Some features are obviously missing, that I may complement if I need them. The first task is to list them.
 
 # Licenses
 Not really sure what it is at the end:
