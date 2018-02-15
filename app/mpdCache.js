@@ -1,3 +1,7 @@
+//not used for the moment
+
+
+
 var mpd = require('mpd'),
     cmd = mpd.cmd;
 var client = mpd.connect({

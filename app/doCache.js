@@ -1,9 +1,5 @@
-var mpd = require('mpd'),
-    cmd = mpd.cmd;
-var client = mpd.connect({
-    port: 6600,
-    host: 'mbox'
-});
+var config=require('../config/config.json');
+var cacheValidity=config.cacheValidity || 3600000;
 
 //Answer to the requests
 module.exports = function (action,shortURLhint, format) { 
@@ -22,7 +18,7 @@ module.exports = function (action,shortURLhint, format) {
             if (contentToCache !== undefined) {
                 console.log("caching ", URLhint, "data len=", contentToCache.length)
                 if (global.MemCache.get(URLhint+format)===null){ //that was not in cache
-                    global.MemCache.put(URLhint+format, contentToCache, 3600000, function(key, value){
+                    global.MemCache.put(URLhint+format, contentToCache, cacheValidity, function(key, value){
                         console.log("cache emptied for ", key, value.length)
                         //we should renew cache here
                     });

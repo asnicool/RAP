@@ -27,11 +27,11 @@ module.exports = function () {
         } else {
             //just add some standard info
             res.JSON.meta={
-                nbEntries: pageSize,
+                nbEntries: fullDataSetLength,
                 pageId: 0,
                 startPos: 0,
-                endPos: pageSize,
-                fullDataSetLength: pageSize,
+                endPos: fullDataSetLength,
+                fullDataSetLength: fullDataSetLength,
                 maxPage: 0
             }            
         }

@@ -14,7 +14,6 @@ var doCache = require('../app/doCache');
 
 /* MPD QUERIES*/
 var mpdInterface = require('../app/mpdInterface');
-var mpdBatchInterface = require('../app/mpdBatchInterface');
 
 /* FOLDER IMAGE SEARCHES*/
 var fetchFolder = require('../app/fetchFolder');
@@ -104,7 +103,7 @@ router.post('/playAll/',
         res.mpdParams = mpdParams;
         return next();
     },
-    mpdBatchInterface(),
+    mpdInterface("__batch__"),
     function (req, res, next) {
         res.sendStatus(200);
     }
@@ -124,7 +123,7 @@ router.post('/playNextAll/',    //FIXME: TODO
         res.mpdParams = mpdParams;
         return next();
     },
-    mpdBatchInterface(),
+    mpdInterface("__batch__"),
     function (req, res, next) {
         res.sendStatus(200);
     }
@@ -139,7 +138,7 @@ router.post('/enqueueAll/',
         res.mpdParams = mpdParams;
         return next();
     },
-    mpdBatchInterface(),
+    mpdInterface("__batch__"),
     function (req, res, next) {
         res.sendStatus(200);
     }
@@ -365,7 +364,7 @@ router.get('/albumsRandomStruct/:query/:pageSize/:page',
         console.log(res.mpdParams);
         return next();
     },
-    mpdBatchInterface(),
+    mpdInterface("__batch__"),
     mpdListToJSON("file"),
     structureAlbum(),
 // :testing

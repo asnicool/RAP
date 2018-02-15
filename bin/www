@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 /**
+ * config.
+ */
+var config=require('../config/config.json');
+
+/**
  * Module dependencies.
  */
 
@@ -12,7 +17,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.listenPort || '3000');
 app.set('port', port);
 
 /**

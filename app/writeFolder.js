@@ -1,3 +1,5 @@
+var config=require('../config/config.json');
+
 var request = require('request');
 var fs = require('fs');
 var path = require('path');
@@ -21,6 +23,7 @@ function mkdirp (dirPath, callback) {
 
 module.exports = function () {
     return function(req,res,next){
+        if (!config.writeFolder) return next();
         if (res.doCache === undefined || res.doCache!==true) return next(); // do we need to cache ?
         if (res.URL== undefined || res.URL== "") return next(); // anything to cache ?
         var thePath=req.params.path.replace(changePath ,location);

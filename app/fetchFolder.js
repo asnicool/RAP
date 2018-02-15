@@ -1,3 +1,5 @@
+var config=require('../config/config.json');
+
 const cheerio = require('cheerio');
 var request = require('request');
 var fs = require('fs');
@@ -5,10 +7,10 @@ var path = require('path');
 
 String.prototype.normalize = function(){
        return this.toString().toLowerCase()
-       .replace(/^the\ /,"")
-       .replace(/\ and /gi," and ")
+       .replace(/\ & /gi," and ")
        .replace(/\ et /gi," and ")
        .replace(/[\ -]*mono$/,"")
+       .replace(/[\ -]*disc [0-9]$/i,"")
        .replace(/[^a-zA-Z0-9 ]/g, "")
        .replace(/^the\ /i,"")
        .replace(/\[[^\]]*\]$/g,"")
@@ -98,11 +100,11 @@ function lookUpAmzAlbum (albumStr, artistStr, callback) {
         console.log("lookUpAmzAlbum callback ",result);
         callback(result);
     });
-//    if (notYetFound) callback(result); //error case, will send {}
 }
 
 module.exports = function () {
     return function(req,res,next){
+        if (!config.fetchFolder) return next();
         if (res.URL!== undefined && res.URL!== "") return next();
         console.log('lookup amz for artist='+ req.params.artist +' album =' + req.params.album);
         //here params are expected to album and artist

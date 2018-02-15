@@ -9,6 +9,7 @@ var routes = require('./routes/frontend');
 var api = require('./routes/api');
 var folder = require('./routes/folder');
 
+var config=require('./config/config.json');
 
 var app = express();
 //the local cache

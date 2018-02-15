@@ -1,1 +1,10 @@
-{ 'config': "not used yet" }
+{
+	"mpdPort":6600,
+	"mpdHost":"mbox",
+	"listenPort": 3000,
+	"fetchFolder": true,
+	"getFolder": true,
+	"getFolderTarget": "http://mbox:8000/",
+	"writeFolder":true,
+	"cacheValidity":3600000
+}

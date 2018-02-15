@@ -37,6 +37,26 @@
         
       .otherwise({redirectTo: '/browseAlbumsDyna/albumsSearch/'});
     });
+
+
+
+
+    app.filter('normalize', function () {
+    return function (stringToNormalize) {
+       return stringToNormalize.toString().toLowerCase()
+       .replace(/\ & /gi," and ")
+       .replace(/\ et /gi," and ")
+       .replace(/[\ -]*mono$/,"")
+       .replace(/[\ -]*disc [0-9]$/i,"")
+       .replace(/[^a-zA-Z0-9 ]/g, "")
+       .replace(/^the\ /i,"")
+       .replace(/\[[^\]]*\]$/g,"")
+       .replace(/\([^\)]*\)$/g,"")
+       .trim();
+        }
+    });
+
+
        
     app.controller('CurrentController', function ($scope, $interval, $http) {
         $interval(function () {
