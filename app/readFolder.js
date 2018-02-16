@@ -1,11 +1,14 @@
 var fs = require('fs');
 var path = require('path');
 
-const location="/media/big/music/"
-var changePath = new RegExp ("^ms");
+var config=require('../config/config.json');
+var location=config.folderBasePath || "../public/db";
+var urlPathFilter= config.urlPathFilter===undefined ? "" : config.urlPathFilter;
+var changePath = new RegExp ("^"+urlPathFilter);
 
 function checkLocImg (thePath, cllbck) {
-    var checkedPath=thePath.replace(changePath,location);
+    var checkedPath=location;
+    checkedPath=thePath.replace(changePath,location);
     if (!fs.existsSync(checkedPath)) checkedPath="";
     cllbck(checkedPath);
 }

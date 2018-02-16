@@ -1,23 +1,24 @@
 //not used for the moment
+//not used, we use the mem cache instead.
+//could be interesting for stats and special requests where mpd is not best suited.
 
-
+var config=require('../config/config.json');
 
 var mpd = require('mpd'),
     cmd = mpd.cmd;
 var client = mpd.connect({
-    port: 6600,
-    host: 'mbox'
+    port: config.mpdPort || 6600,
+    host: config.mpdHost || 'localhost'
 });
 
 if (!global.MemCache) global.MemCache = require('memory-cache'); //to be put in API router ?
 
 var mpdCache={};
-//not used, we use the mem cache instead.
 // mpdCache.Albums=[];
 // mpdCache.Artists=[];
 
-mpdCache.key=['albumsJson','artistsJson','genresJson','datesJson',];
-mpdCache.TTL=36000000;
+mpdCache.keys= ['albumsJson','artistsJson','genresJson','datesJson',];
+mpdCache.TTL = 36000000;
 
 
 mpdCache.init=function(){

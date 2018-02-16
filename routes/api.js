@@ -16,13 +16,13 @@ var doCache = require('../app/doCache');
 var mpdInterface = require('../app/mpdInterface');
 
 /* FOLDER IMAGE SEARCHES*/
-var fetchFolder = require('../app/fetchFolder');
-var getFolder = require('../app/getFolder');
-var readFolder = require('../app/readFolder');
-var writeFolder = require('../app/writeFolder');
+var fetchFolder  = require('../app/fetchFolder');
+var getFolder    = require('../app/getFolder');
+var readFolder   = require('../app/readFolder');
+var writeFolder  = require('../app/writeFolder');
 
 // MPD Local memory base
-const mpdCache=require('../app/mpdCache');
+const mpdCache   = require('../app/mpdCache');
 
 // mpdCache.initAsync();
 

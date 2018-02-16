@@ -6,5 +6,7 @@
 	"getFolder": true,
 	"getFolderTarget": "http://mbox:8000/",
 	"writeFolder":true,
-	"cacheValidity":3600000
+	"cacheValidity":3600000,
+	"folderBasePath":"/media/big/music/",
+	"urlPathFilter": ""
 }

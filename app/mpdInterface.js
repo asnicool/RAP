@@ -2,6 +2,7 @@ var config=require('../config/config.json');
 
 var mpd = require('mpd'),
     cmd = mpd.cmd;
+
 var client = mpd.connect({
     port: config.mpdPort || 6600,
     host: config.mpdHost || 'localhost'

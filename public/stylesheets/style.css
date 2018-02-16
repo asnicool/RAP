@@ -47,7 +47,6 @@ ul {
 
 li {
     float: left;
-    height:55px;
 }
 
 li a {
@@ -110,12 +109,18 @@ li.dropdown {
 
 
 .volume {
-    position: absolute;
+    position: fixed;
+    left:50%;
+    transform: translate(-50%, 45px);
+    background-color: #090909;
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
     max-width:400px; 
     min-width:200px; 
     padding-left:10px;
     padding-right:10px;
-d}
+    padding-bottom: 7px;
+}
 
 .progress-bar-even {
       background-color: #818181 !important;
