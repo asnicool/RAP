@@ -28,7 +28,7 @@
         </div>
         <div class="albumFrame">
             <div class="trackList"
-            ng-repeat="track in selectedAlbumDetails.Tracks  track by track.Disc+track.Track+track.Title">
+            ng-repeat="track in selectedAlbumDetails.Tracks track by track.Disc+track.Track+track.Title">
                 <div class="BadgesBox">
                     <div class="trackNb"><span class="label label-default">{{selectedSongs[track.file]}}</span><b>{{track.Disc}}</b>&nbsp{{track.Track}}</div>
                     <div class="trackTime">{{track.timeDisplay}}</div>
