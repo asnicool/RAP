@@ -15,6 +15,7 @@ function dynamicSort(property) {
         return result * sortOrder;
     }
 }
+
 function dynamicSortMultiple() {
     /*
      * save the arguments object as it will be overwritten
@@ -34,7 +35,7 @@ function dynamicSortMultiple() {
         return result;
     }
 }
-//
+//finally not used 
 
 
 module.exports = function (firstField) {
@@ -63,6 +64,7 @@ module.exports = function (firstField) {
         var JSONarray= JSON.parse(jsonString);
 
         //sorting results, as it appears that mpd sometimes like mixing the track number only.
+        //finally not used - messes the playlist - to do in the GUI.
         //JSONarray.sort(dynamicSortMultiple('Date', 'Album', 'Disc'));
 
         //Enriching the info when in file mode (all data list albums)
@@ -87,7 +89,6 @@ module.exports = function (firstField) {
                 prevJSON=myJson;
             });
         }
-        JSONarray.sort(dynamicSort('sortCrit'));
         res.JSON = JSONarray;
         return next();
     }

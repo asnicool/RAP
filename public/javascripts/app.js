@@ -403,10 +403,18 @@
                 }
                 $scope.refreshSlider($scope.searchAlbumData);
 
-                $scope.albums=albumList; // trigger upding the gui
-                $scope.AlbumsDetails=data.data.data;
-                //hide the slide we show it all
+                //sort albums tracks as it is sometimes messed up by mpd
+                data.data.data.forEach(function(albumEntry){
+                    albumEntry.Tracks.sort(function (a,b) {
+                        return (parseInt(a['sortCrit']) < parseInt(b['sortCrit'])) ? -1 : ( parseInt(a['sortCrit']) > parseInt(b['sortCrit'])) ? 1 : 0;
+                    });
+                });
 
+                // triggers updating the gui
+                $scope.albums=albumList; 
+                $scope.AlbumsDetails=data.data.data;
+
+                //hide the slide we show it all
                 $scope.PageInfo.thinking=false;
             });
         }
